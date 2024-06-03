@@ -56,7 +56,7 @@ const HomePage = async () => {
         </section>
 
         {/* popular section */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-6 gap-y-20 md:gap-12 my-4 py-12">
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 gap-y-20 my-4 py-12">
           {featuredProducts?.slice(0, 4).map((item) => (
             <PopularContent data={item} key={item.id} />
           ))}
