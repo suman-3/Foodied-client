@@ -4,9 +4,10 @@ import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
 import { Container } from "./container";
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
+import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { MainNav } from "./main-nav";
+import { Skeleton } from "../ui/skeleton";
 
 interface HeaderProps {
   userId: string | null;
@@ -44,12 +45,24 @@ export const Header = ({ userId }: HeaderProps) => {
           </Link>
 
           {/* Main Nav Bar */}
-          <MainNav  scrolled={scrolled} className="mr-8"/>
+          <MainNav scrolled={scrolled} className="mr-8" />
 
           {/* User button or login/signup */}
           {userId ? (
             <div className="ml-4 flex items-center space-x-4">
-              <UserButton afterSignOutUrl="/" />
+              <ClerkLoading>
+                <Skeleton className="w-9 h-9 rounded-full bg-gray-300" />
+              </ClerkLoading>
+              <ClerkLoaded>
+                <UserButton
+                  afterSignOutUrl="/"
+                  appearance={{
+                    elements: {
+                      avatarBox: "h-9 w-9",
+                    },
+                  }}
+                />
+              </ClerkLoaded>
             </div>
           ) : (
             <div className="flex items-center space-x-4 ml-4">
