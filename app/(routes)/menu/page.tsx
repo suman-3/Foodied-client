@@ -6,6 +6,10 @@ import React from "react";
 import { CategoryFilter } from "./_components/categorty-filter";
 import getSizes from "@/actions/getSizes";
 import { SizeFilter } from "./_components/size-filter";
+import getKitchens from "@/actions/getKitchens";
+import { KitchenFilter } from "./_components/kitchen-filter";
+import getCuisines from "@/actions/getCuisines";
+import { CuisineFilter } from "./_components/cuisines-filter";
 
 export const revalidate = 0;
 
@@ -22,6 +26,8 @@ interface MenuPageProps {
 const MenuPage = async ({ searchParams }: MenuPageProps) => {
   const categories = await getCategories();
   const sizes = await getSizes();
+  const kitchens = await getKitchens();
+  const cuisines = await getCuisines();
 
   return (
     <Container className="px-4 md:px-12">
@@ -30,6 +36,8 @@ const MenuPage = async ({ searchParams }: MenuPageProps) => {
           <FilterContainer>
             <CategoryFilter categories={categories} />
             <SizeFilter sizes={sizes} />
+            <KitchenFilter kitchens={kitchens} />
+            <CuisineFilter cuisines={cuisines} />
           </FilterContainer>
         </div>
         <Box className="col-span-12 md:col-span-10 flex-col items-start justify-start w-full">
