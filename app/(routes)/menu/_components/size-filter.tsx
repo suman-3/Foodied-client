@@ -37,17 +37,17 @@ export const SizeFilter = ({ sizes }: SizeFilterProps) => {
       <Box className="flex flex-col gap-2 mt-2">
         {sizes.map((size) => (
           <div
-            onClick={() => handleClick(size.value)}
+            onClick={() => handleClick(size.name)}
             className={cn(
               "text-sm font-semibold text-neutral-500 flex items-center gap-2",
-              size.value === searchParams.get("size") && "text-hero"
+              size.name === searchParams.get("size") && "text-hero"
             )}
             key={size.id}
           >
             <p>
               {size.name} ({size.value})
             </p>
-            {size.value === searchParams.get("size") && (
+            {size.name === searchParams.get("size") && (
               <Check className="w-4 h-4 text-hero" />
             )}
           </div>
