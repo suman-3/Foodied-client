@@ -3,6 +3,7 @@
 import { Box } from "@/components/shared/box";
 import { cn } from "@/lib/utils";
 import { Category } from "@/types-db";
+import { Check } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 
@@ -32,7 +33,7 @@ export const CategoryFilter = ({ categories }: CategoryFilterProps) => {
 
   return (
     <Box className="flex-col gap-2 border-b pb-4 cursor-pointer">
-      <h2 className="text-xl font-semibold text-neutral-700">Category</h2>
+      <h2 className="text-xl font-semibold text-neutral-700">Categories</h2>
       <Box className="flex-col gap-2 mt-2">
         {categories.map((category) => (
           <div
@@ -44,6 +45,9 @@ export const CategoryFilter = ({ categories }: CategoryFilterProps) => {
             key={category.id}
           >
             <p>{category.name}</p>
+            {category.name === searchParams.get("category") && (
+              <Check className="w-4 h-4 text-hero" />
+            )}
           </div>
         ))}
       </Box>
