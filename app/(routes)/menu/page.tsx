@@ -10,6 +10,8 @@ import getKitchens from "@/actions/getKitchens";
 import { KitchenFilter } from "./_components/kitchen-filter";
 import getCuisines from "@/actions/getCuisines";
 import { CuisineFilter } from "./_components/cuisines-filter";
+import getProducts from "@/actions/getProducts";
+import { PageContent } from "./_components/page-content";
 
 export const revalidate = 0;
 
@@ -29,6 +31,14 @@ const MenuPage = async ({ searchParams }: MenuPageProps) => {
   const kitchens = await getKitchens();
   const cuisines = await getCuisines();
 
+  const products = await getProducts({
+    size: searchParams?.size,
+    isFeatured: searchParams?.isFeatured,
+    kitchen: searchParams?.kitchen,
+    cuisine: searchParams?.cuisine,
+    category: searchParams?.category
+  })
+
   return (
     <Container className="px-4 md:px-12">
       <div className="grid grid-cols-1 md:grid-cols-12 py-12 gap-2">
@@ -41,7 +51,7 @@ const MenuPage = async ({ searchParams }: MenuPageProps) => {
           </FilterContainer>
         </div>
         <Box className="col-span-12 md:col-span-10 flex-col items-start justify-start w-full">
-          Page Content
+      <PageContent products={products} />
         </Box>
       </div>
     </Container>
